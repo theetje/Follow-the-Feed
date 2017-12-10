@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print(Auth.auth().currentUser?.email! as Any)
         // Do any additional setup after loading the view.
     }
 

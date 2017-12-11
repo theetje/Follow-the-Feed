@@ -9,32 +9,60 @@
 import UIKit
 
 class SavedFeedTableViewController: UITableViewController {
-
+    
+    var SavedArticles = [Article]()
+    override func viewWillAppear(_ animated: Bool) {
+        print("TEST")
+        
+        if let data = getArticles() {
+            SavedArticles = data
+        }
+        print(SavedArticles.count)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+   
+    }
+    //
+    func getArticles() -> [Article]? {
+        guard let articleData = UserDefaults.standard.object(forKey: "Articles") as? [Data] else { return nil }
+        return articleData.flatMap { return Article(data: $0) }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // Maak de content van de cellen
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let savedArticle = SavedArticles[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OnlineCellIdentifier", for: indexPath) as! OnlineFeedTableViewCell
+        cell.titleLabel.text = savedArticle.author
+        cell.descriptionLabel.text = savedArticle.description
+        
+        ArticleController.shared.fetchImage(url: savedArticle.urlToImage) {
+            (image) in
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                cell.titleImage.image = image
+            }
+        }
+        
+        return cell
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return SavedArticles.count
     }
 
     /*

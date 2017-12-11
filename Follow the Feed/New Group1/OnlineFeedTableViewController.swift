@@ -10,13 +10,12 @@ import UIKit
 
 class OnlineFeedTableViewController: UITableViewController {
     var OnlineArticles = [Article]()
-    
+//    var articles = [Article]()
     // OUTPUTS:
     
     // ACTIONS:
         @IBAction func unwindToOnlineTableView(segue: UIStoryboardSegue) {
             if segue.identifier == "DismissOnlineFeed" {
-    
             }
         }
     

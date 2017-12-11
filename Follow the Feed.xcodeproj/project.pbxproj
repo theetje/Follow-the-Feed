@@ -15,6 +15,8 @@
 		E9ADC5BB1FDDA7D1002F0D7A /* ArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADC5BA1FDDA7D1002F0D7A /* ArticleController.swift */; };
 		E9ADC5BD1FDDAD9B002F0D7A /* OnlineFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADC5BC1FDDAD9B002F0D7A /* OnlineFeedTableViewController.swift */; };
 		E9ADC5BF1FDDB218002F0D7A /* SavedFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADC5BE1FDDB218002F0D7A /* SavedFeedTableViewController.swift */; };
+		E9AF9A991FDE9A6900042C1C /* OnlineFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF9A981FDE9A6900042C1C /* OnlineFeedTableViewCell.swift */; };
+		E9AF9A9B1FDEAE3800042C1C /* FeedSiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AF9A9A1FDEAE3800042C1C /* FeedSiteViewController.swift */; };
 		E9E300EC1FDD39D900BCE7F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9E300EB1FDD39D900BCE7F9 /* GoogleService-Info.plist */; };
 		E9F9455F1FD856060026F3B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9455E1FD856060026F3B7 /* AppDelegate.swift */; };
 		E9F945641FD856060026F3B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9F945621FD856060026F3B7 /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		E9ADC5BA1FDDA7D1002F0D7A /* ArticleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleController.swift; sourceTree = "<group>"; };
 		E9ADC5BC1FDDAD9B002F0D7A /* OnlineFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineFeedTableViewController.swift; sourceTree = "<group>"; };
 		E9ADC5BE1FDDB218002F0D7A /* SavedFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFeedTableViewController.swift; sourceTree = "<group>"; };
+		E9AF9A981FDE9A6900042C1C /* OnlineFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineFeedTableViewCell.swift; sourceTree = "<group>"; };
+		E9AF9A9A1FDEAE3800042C1C /* FeedSiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSiteViewController.swift; sourceTree = "<group>"; };
 		E9E300EB1FDD39D900BCE7F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9F9455B1FD856050026F3B7 /* Follow the Feed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Follow the Feed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F9455E1FD856060026F3B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 		E9368D6B1FDD3D8C0047468F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E9AF9A9A1FDEAE3800042C1C /* FeedSiteViewController.swift */,
+				E9AF9A981FDE9A6900042C1C /* OnlineFeedTableViewCell.swift */,
 				E9ADC5BE1FDDB218002F0D7A /* SavedFeedTableViewController.swift */,
 				E9ADC5BC1FDDAD9B002F0D7A /* OnlineFeedTableViewController.swift */,
 				E9368D691FDD3D7A0047468F /* LoginViewController.swift */,
@@ -136,7 +142,6 @@
 			children = (
 				E9ADC5AB1FDD840B002F0D7A /* UserModel.swift */,
 				E9ADC5B81FDDA4D8002F0D7A /* ArticleItems.swift */,
-				E9ADC5BA1FDDA7D1002F0D7A /* ArticleController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 		E9ADC5B71FDDA498002F0D7A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E9ADC5BA1FDDA7D1002F0D7A /* ArticleController.swift */,
 			);
 			name = Controller;
 			path = ..;
@@ -374,10 +380,6 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -396,10 +398,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -424,11 +422,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Follow the Feed/Pods-Follow the Feed-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
@@ -449,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9AF9A991FDE9A6900042C1C /* OnlineFeedTableViewCell.swift in Sources */,
 				E9ADC5BB1FDDA7D1002F0D7A /* ArticleController.swift in Sources */,
 				E9ADC5A81FDD6F28002F0D7A /* MainViewController.swift in Sources */,
 				E9368D6A1FDD3D7A0047468F /* LoginViewController.swift in Sources */,
@@ -457,6 +456,7 @@
 				E9ADC5AC1FDD840B002F0D7A /* UserModel.swift in Sources */,
 				E9F9455F1FD856060026F3B7 /* AppDelegate.swift in Sources */,
 				E9ADC5BF1FDDB218002F0D7A /* SavedFeedTableViewController.swift in Sources */,
+				E9AF9A9B1FDEAE3800042C1C /* FeedSiteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

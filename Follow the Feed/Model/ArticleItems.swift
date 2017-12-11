@@ -9,20 +9,20 @@
 import Foundation
 
 struct Article: Codable {
-    var id: String
-    var name: String
+    //    var id: String
+    var author: String
     var description: String
     var url: URL
     var urlToImage: URL
-    var publishedAt: String
+//    var publishedAt: String
     
     enum CodingKeys: String, CodingKey {
-        case id
-        case name
+        //    case id
+        case author
         case description
         case url
         case urlToImage
-        case publishedAt
+//        case publishedAt
     }
 }
 

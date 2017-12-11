@@ -1,0 +1,65 @@
+//
+//  ArticleController.swift
+//  Follow the Feed
+//
+//  Created by Thomas De lange on 10-12-17.
+//  Copyright © 2017 Thomas De lange. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+// Maak een extensie van de URL class om een query mee te geven. Dit is denk ik een specifieke querie voor NASA API
+extension URL {
+    func withQueries(_ queries: [String: String]) -> URL? {
+        var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
+        components?.queryItems = queries.flatMap { URLQueryItem(name: $0.0, value: $0.1) }
+        return components?.url
+    }
+}
+
+class ArticleController {
+    static let shared = ArticleController()
+    
+    // Eerste functie die articelen ophaald.
+    func fetchArticles(completion: @escaping ([Article]?) -> Void) {
+        // URL waar request gedaan wordt
+        let baseURL = URL(string: "https://newsapi.org/v2/top-headlines")!
+        
+        // Querie opdracht
+        let query: [String: String] = [
+            "apiKey": "cc5525640ac54790a4a1c58bea987641",
+            "sources": "bbc-news",
+            ]
+        
+        let queryURL = baseURL.withQueries(query)!
+        
+        let task = URLSession.shared.dataTask(with: queryURL) {
+            (data, response, error) in
+            let jsonDeconder = JSONDecoder()
+            if let data = data,
+                let articleItems = try? jsonDeconder.decode(Articles.self, from: data) {
+                completion(articleItems.articles)
+            }
+            else {
+                // print("ERROR")
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+    
+    func fetchImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+
+}
+

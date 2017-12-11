@@ -7,14 +7,52 @@
 //
 
 import UIKit
+import Firebase
 
 class OnlineFeedTableViewController: UITableViewController {
+
     var OnlineArticles = [Article]()
 //    var articles = [Article]()
     // OUTPUTS:
     
     // ACTIONS:
-        @IBAction func unwindToOnlineTableView(segue: UIStoryboardSegue) {
+    @IBAction func likeButtonTapped(_ sender: UIButton) {
+        print("TAP")
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
+                var stars: Dictionary<String, Bool>
+                stars = post["somestars"] as? [String : Bool] ?? [:]
+                var starCount = post["somestarCount"] as? Int ?? 0
+                if let _ = stars[uid] {
+                    // Unstar the post and remove self from stars
+                    starCount -= 1
+                    stars.removeValue(forKey: uid)
+                } else {
+                    // Star the post and add self to stars
+                    starCount += 1
+                    stars[uid] = true
+                }
+                post["somestarCount"] = starCount as AnyObject?
+                post["somestars"] = stars as AnyObject?
+
+                // Set value and report transaction success
+                currentData.value = post
+                print(currentData)
+                return TransactionResult.success(withValue: currentData)
+            }
+            return TransactionResult.success(withValue: currentData)
+
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    @IBAction func unwindToOnlineTableView(segue: UIStoryboardSegue) {
             if segue.identifier == "DismissOnlineFeed" {
             }
         }
@@ -22,6 +60,9 @@ class OnlineFeedTableViewController: UITableViewController {
     // OVERRIDE FUNCTIONS:
     override func viewDidLoad() {
         super.viewDidLoad()
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("condition")
         ArticleController.shared.fetchArticles { (articlesOnline) in
             if let articlesOnline = articlesOnline {
                 self.updateUI(with: articlesOnline)

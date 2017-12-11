@@ -16,15 +16,15 @@ class FeedSiteViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        PageView.uiDelegate = self
 //        let webConfiguration = WKWebViewConfiguration()
 //        PageView = WKWebView(frame: .zero, configuration: webConfiguration)
-//        PageView.uiDelegate = self
 //        view = PageView
         
-//        let myURL = URL(OnlineArticle.url)
+//        let testURL = URL(string: "https://www.apple.com")
         print(OnlineArticle.url)
+//        let myRequest = URLRequest(url: OnlineArticle.url)
         let myRequest = URLRequest(url: OnlineArticle.url)
-//        let myRequest = URLRequest(url: myURL!)
         PageView.load(myRequest)
     }
 

@@ -12,7 +12,6 @@ import Firebase
 
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    
     // OUTLETS:
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -32,9 +31,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
                     // Inloggen is goed gegaan:
                     if user != nil {
+                        let localUser = User(email: self.emailTextField.text!, password: self.passwordTextField.text!)
+                        
+                        UserDefaults.standard.set(try? PropertyListEncoder().encode(localUser), forKey:"profile")
+                        
                         self.performSegue(withIdentifier: "loginComplete", sender: self)
                         print("-- LOGIN SUCCES --")
-                        
                     }
                         // Gebruiker bestaat niet of andere login error:
                     else {
@@ -119,8 +121,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     // FUNCTIONS:
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let data = UserDefaults.standard.value(forKey: "profile") as? Data {
+            let userInfo = try? PropertyListDecoder().decode(User.self, from: data)
+            Auth.auth().signIn(withEmail: (userInfo?.email)!, password: (userInfo?.password)!, completion: { (user, error) in
+                // Inloggen is goed gegaan:
+                if user != nil {
+                    let localUser = User(email: self.emailTextField.text!, password: self.passwordTextField.text!)
+                    
+                    UserDefaults.standard.set(try? PropertyListEncoder().encode(localUser), forKey:"profile")
+                    
+                    self.performSegue(withIdentifier: "loginComplete", sender: self)
+                    print("-- LOGIN SUCCES --")
+                }
+                
+            })
+        }
         reEnterLabel.isHidden = true
         reEnterTextField.isHidden = true
         reEnterUnderline.isHidden = true

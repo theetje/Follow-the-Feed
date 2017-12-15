@@ -15,19 +15,16 @@
 import UIKit
 import Firebase
 class OnlineFeedTableViewCell: UITableViewCell {
+    // URL paht is alleen om de data in de datase in te laden.
+    var UrlPath: URL!
     
+    // OUTLETS:
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
-    // URL paht is alleen om de data in de datase in te laden.
-    var UrlPath: URL!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+    // ACTIONS:
     @IBAction func likeButtonTapped(_ sender: UIButton) {
         print("--- OUTPUT ---")
         
@@ -39,7 +36,7 @@ class OnlineFeedTableViewCell: UITableViewCell {
         // Een met de string als url en een met counter er achter om te tellen.
         let URLAsString = UrlPath.absoluteString
         let URLAsCounter = URLAsString + "Counter"
-
+        
         let dataString = URLAsString.data(using: .utf8)!
         let hexString = dataString.map{ String(format:"%02x", $0) }.joined()
         
@@ -78,6 +75,12 @@ class OnlineFeedTableViewCell: UITableViewCell {
         }
     }
 
+    // OVERRIDES:
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

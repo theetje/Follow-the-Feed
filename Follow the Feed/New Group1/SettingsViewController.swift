@@ -1,20 +1,26 @@
 //
-//  MainViewController.swift
+//  SettingsViewController.swift
 //  Follow the Feed
 //
-//  Created by Thomas De lange on 10-12-17.
+//  Created by Thomas De lange on 15-12-17.
 //  Copyright © 2017 Thomas De lange. All rights reserved.
 //
 
 import UIKit
-import FirebaseAuth
 
-class MainViewController: UITabBarController {
+class SettingsViewController: UIViewController {
 
+    @IBAction func logOut(_ sender: Any) {
+        // maak een object om local user in op te slaan.
+        let localUser = User(email: "", password: "")
+        // Sla op in de UserDefaults van het apparaat.
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(localUser), forKey:"profile")
+        
+        self.performSegue(withIdentifier: "logOutsegue", sender: self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(Auth.auth().currentUser?.email! as Any)
+
         // Do any additional setup after loading the view.
     }
 

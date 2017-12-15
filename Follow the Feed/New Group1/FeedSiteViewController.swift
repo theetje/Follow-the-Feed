@@ -19,23 +19,12 @@ class FeedSiteViewController: UIViewController, WKUIDelegate {
     // Sla de feed op op het apparaat.
     @IBAction func SaveItem(_ sender: UIBarButtonItem) {
         var NewSaves = [OnlineArticle]
-        if let savedItems = getArticles() {
+        if let savedItems = ArticleController.shared.getArticles() {
             for items in savedItems {
                 NewSaves.append(items)
             }
         }
-        saveArticles(arrayArticles: NewSaves as! [Article])
-    }
-    
-    func saveArticles(arrayArticles: [Article]) {
-        let ArticlesData = arrayArticles.map { $0.encode() }
-        UserDefaults.standard.set(ArticlesData, forKey: "Articles")
-    }
-    
-    // TODO: Eventueel weg halen en in een global stoppen.
-    func getArticles() -> [Article]? {
-        guard let articleData = UserDefaults.standard.object(forKey: "Articles") as? [Data] else { return nil }
-        return articleData.flatMap { return Article(data: $0) }
+        ArticleController.shared.saveArticles(arrayArticles: NewSaves as! [Article])
     }
     
     override func viewDidLoad() {

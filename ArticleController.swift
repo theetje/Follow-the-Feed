@@ -60,6 +60,16 @@ class ArticleController {
         }
         task.resume()
     }
+    
+    func saveArticles(arrayArticles: [Article]) {
+        let ArticlesData = arrayArticles.map { $0.encode() }
+        UserDefaults.standard.set(ArticlesData, forKey: "Articles")
+    }
+    
+    func getArticles() -> [Article]? {
+        guard let articleData = UserDefaults.standard.object(forKey: "Articles") as? [Data] else { return nil }
+        return articleData.flatMap { return Article(data: $0) }
+    }
 
 }
 

@@ -23,7 +23,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // ACTIONS:
     @IBAction func loginAction(_ sender: UIButton) {
-        
         // Kijk of de velden voor email en wachtwoord ingevuld zijn.
         if emailTextField.text != "" && passwordTextField.text != "" {
             // Login user
@@ -31,12 +30,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
                     // Inloggen is goed gegaan:
                     if user != nil {
+                        // maak een object om local user in op te slaan.
                         let localUser = User(email: self.emailTextField.text!, password: self.passwordTextField.text!)
-                        
+                        // Sla op in de UserDefaults van het apparaat.
                         UserDefaults.standard.set(try? PropertyListEncoder().encode(localUser), forKey:"profile")
                         
                         self.performSegue(withIdentifier: "loginComplete", sender: self)
-                        print("-- LOGIN SUCCES --")
                     }
                         // Gebruiker bestaat niet of andere login error:
                     else {
@@ -119,9 +118,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     // FUNCTIONS:
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = UserDefaults.standard.value(forKey: "profile") as? Data {
@@ -134,7 +131,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(try? PropertyListEncoder().encode(localUser), forKey:"profile")
                     
                     self.performSegue(withIdentifier: "loginComplete", sender: self)
-                    print("-- LOGIN SUCCES --")
                 }
                 
             })
@@ -159,18 +155,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // Extentions:
-    
 }

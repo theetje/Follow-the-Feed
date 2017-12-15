@@ -13,52 +13,14 @@ import FirebaseDatabaseUI
 class OnlineFeedTableViewController: UITableViewController {
 
     var OnlineArticles = [Article]()
-//    var articles = [Article]()
-    // OUTPUTS:
-    
+
     // ACTIONS:
-//    @IBAction func likeButtonTapped(_ sender: UIButton) {
-//        print("TAP")
-//        var ref: DatabaseReference!
-//        ref = Database.database().reference()
-//
-//        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
-//            if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
-//                var stars: Dictionary<String, Bool>
-//                stars = post["somestars"] as? [String : Bool] ?? [:]
-//                var starCount = post["somestarCount"] as? Int ?? 0
-//                if let _ = stars[uid] {
-//                    // Unstar the post and remove self from stars
-//                    starCount -= 1
-//                    stars.removeValue(forKey: uid)
-//                } else {
-//                    // Star the post and add self to stars
-//                    starCount += 1
-//                    stars[uid] = true
-//                }
-//                post["somestarCount"] = starCount as AnyObject?
-//                post["somestars"] = stars as AnyObject?
-//
-//                // Set value and report transaction success
-//                currentData.value = post
-//                print(currentData)
-//                return TransactionResult.success(withValue: currentData)
-//            }
-//            return TransactionResult.success(withValue: currentData)
-//
-//        }) { (error, committed, snapshot) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
     @IBAction func unwindToOnlineTableView(segue: UIStoryboardSegue) {
             if segue.identifier == "DismissOnlineFeed" {
             }
         }
     
-    // OVERRIDE FUNCTIONS:
+    // OVERRIDES:
     override func viewDidLoad() {
         super.viewDidLoad()
         var ref: DatabaseReference!
@@ -74,8 +36,12 @@ class OnlineFeedTableViewController: UITableViewController {
         
     // Maak de content van de cellen
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let onlineArticle = OnlineArticles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "OnlineCellIdentifier", for: indexPath) as! OnlineFeedTableViewCell
+        
+        cell.likeButton.setTitle("Likes: 0", for: .normal)
+        
         cell.titleLabel.text = onlineArticle.author
         cell.descriptionLabel.text = onlineArticle.description
         cell.UrlPath = onlineArticle.url
@@ -88,11 +54,9 @@ class OnlineFeedTableViewController: UITableViewController {
         let hexCounter = dataCounter.map{ String(format:"%02x", $0) }.joined()
         
         _ = Database.database().reference().child(hexCounter).observe(DataEventType.value, with: { (snapshot) in
-            if snapshot.value == nil {
-                cell.likeButton.setTitle("Likes: 0)", for: .normal)
+            if snapshot.exists() {
+                cell.likeButton.setTitle("Likes: \(String(describing: snapshot.value!))", for: .normal)
             }
-            
-            cell.likeButton.setTitle("Likes: \(String(describing: snapshot.value!))", for: .normal)
         })
     
         ArticleController.shared.fetchImage(url: onlineArticle.urlToImage) {

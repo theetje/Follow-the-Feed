@@ -10,12 +10,13 @@ import UIKit
 import WebKit
 
 class FeedSiteViewController: UIViewController, WKUIDelegate {
-    // Legacy?:
+    
     var OnlineArticle: Article!
     // OUTLET:
     @IBOutlet weak var PageView: WKWebView!
     
     // ACTION:
+    // Sla de feed op op het apparaat.
     @IBAction func SaveItem(_ sender: UIBarButtonItem) {
         var NewSaves = [OnlineArticle]
         if let savedItems = getArticles() {

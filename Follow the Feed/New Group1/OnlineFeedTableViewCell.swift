@@ -6,6 +6,12 @@
 //  Copyright © 2017 Thomas De lange. All rights reserved.
 //
 
+//extension Data {
+//    var hexDescription: String {
+//        return reduce("") {$0 + String(format: "%02x", $1)}
+//    }
+//}
+
 import UIKit
 import Firebase
 class OnlineFeedTableViewCell: UITableViewCell {
@@ -14,9 +20,8 @@ class OnlineFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
-
-    
-
+    // URL paht is alleen om de data in de datase in te laden.
+    var UrlPath: URL!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,16 +29,30 @@ class OnlineFeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-        print("TAP")
-        print(titleLabel.text!)
+        print("--- OUTPUT ---")
+        
         var ref: DatabaseReference!
         ref = Database.database().reference()
+        
+        
+        // om de data te kunnen gebruiken in de database (met url als key) moet die omgeschreven worden naar een hexString:
+        // Een met de string als url en een met counter er achter om te tellen.
+        let URLAsString = UrlPath.absoluteString
+        let URLAsCounter = URLAsString + "Counter"
+
+        let dataString = URLAsString.data(using: .utf8)!
+        let hexString = dataString.map{ String(format:"%02x", $0) }.joined()
+        
+        let dataCounter = URLAsCounter.data(using: .utf8)!
+        let hexCounter = dataCounter.map{ String(format:"%02x", $0) }.joined()
         
         ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             if var post = currentData.value as? [String : AnyObject], let uid = Auth.auth().currentUser?.uid {
                 var stars: Dictionary<String, Bool>
-                stars = post["somestars"] as? [String : Bool] ?? [:]
-                var starCount = post["somestarCount"] as? Int ?? 0
+                //Hier is somstarr dus de naam van het veld
+                // En somsetarcounter houd bij hoeveel mensen met ID van hierboven somestar hebben geliked.
+                stars = post[hexString] as? [String : Bool] ?? [:]
+                var starCount = post[hexCounter] as? Int ?? 0
                 if let _ = stars[uid] {
                     // Unstar the post and remove self from stars
                     starCount -= 1
@@ -43,12 +62,11 @@ class OnlineFeedTableViewCell: UITableViewCell {
                     starCount += 1
                     stars[uid] = true
                 }
-                post["somestarCount"] = starCount as AnyObject?
-                post["somestars"] = stars as AnyObject?
+                post[hexCounter] = starCount as AnyObject?
+                post[hexString] = stars as AnyObject?
                 
                 // Set value and report transaction success
                 currentData.value = post
-                print(currentData)
                 return TransactionResult.success(withValue: currentData)
             }
             return TransactionResult.success(withValue: currentData)

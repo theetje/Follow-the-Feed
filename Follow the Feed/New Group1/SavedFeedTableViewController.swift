@@ -12,7 +12,6 @@ class SavedFeedTableViewController: UITableViewController {
     
     var SavedArticles = [Article]()
     override func viewWillAppear(_ animated: Bool) {
-        print("TEST")
         
         if let data = getArticles() {
             SavedArticles = data
@@ -52,6 +51,14 @@ class SavedFeedTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSite" {
+            let feedSiteViewController = segue.destination as! SavedFeedViewController
+            let index = tableView.indexPathForSelectedRow!.row
+            feedSiteViewController.OnlineArticle = SavedArticles[index]
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -64,6 +71,12 @@ class SavedFeedTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return SavedArticles.count
     }
+    
+    @IBAction func unwindToSavedTableView(segue: UIStoryboardSegue) {
+        if segue.identifier == "DismissOnlineFeed" {
+        }
+    }
+
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

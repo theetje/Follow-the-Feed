@@ -23,6 +23,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // ACTIONS:
     @IBAction func loginAction(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3) {
+            self.loginButton.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
+            self.loginButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
         // Kijk of de velden voor email en wachtwoord ingevuld zijn.
         if emailTextField.text != "" && passwordTextField.text != "" {
             // Login user

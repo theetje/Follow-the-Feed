@@ -19,7 +19,12 @@ extension URL {
 }
 
 class ArticleController {
-    static let shared = ArticleController()
+    static let shared = ArticleController(source: "bbc-news")
+    var source: String
+    
+    init(source: String) {
+        self.source = source
+    }
     
     // Eerste functie die articelen ophaald.
     func fetchArticles(completion: @escaping ([Article]?) -> Void) {
@@ -29,7 +34,7 @@ class ArticleController {
         // Querie opdracht
         let query: [String: String] = [
             "apiKey": "cc5525640ac54790a4a1c58bea987641",
-            "sources": "bbc-news",
+            "sources": source,
             ]
         let queryURL = baseURL.withQueries(query)!
         

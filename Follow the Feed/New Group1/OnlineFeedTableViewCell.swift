@@ -25,6 +25,15 @@ class OnlineFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     // ACTIONS:
+    @IBAction func likeButtonPressedDown(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3) {
+            self.likeButton.alpha = 0.5
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.likeButton.alpha = 1.0
+        }
+    }
+    
     @IBAction func likeButtonTapped(_ sender: UIButton) {
         // Dit is de root van de database:
         var ref: DatabaseReference!

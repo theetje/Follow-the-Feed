@@ -26,11 +26,9 @@ class OnlineFeedTableViewCell: UITableViewCell {
     
     // ACTIONS:
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-        print("--- OUTPUT ---")
-        
+        // Dit is de root van de database:
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        
         
         // om de data te kunnen gebruiken in de database (met url als key) moet die omgeschreven worden naar een hexString:
         // Een met de string als url en een met counter er achter om te tellen.

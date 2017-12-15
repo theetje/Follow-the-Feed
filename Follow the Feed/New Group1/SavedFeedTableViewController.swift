@@ -11,7 +11,7 @@ import UIKit
 class SavedFeedTableViewController: UITableViewController {
     var SavedArticles = [Article]()
     
-    // Actions:
+    // ACTIONS:
     @IBAction func unwindToSavedTableView(segue: UIStoryboardSegue) {
         if segue.identifier == "DismissOnlineFeed" {
         }
@@ -19,8 +19,8 @@ class SavedFeedTableViewController: UITableViewController {
     
     // OVERRIDES:
     override func viewWillAppear(_ animated: Bool) {
-        
-        if let data = getArticles() {
+        // Haal de opgeslagen articelen op.
+        if let data = ArticleController.shared.getArticles() {
             SavedArticles = data
         }
         print(SavedArticles.count)
@@ -30,15 +30,9 @@ class SavedFeedTableViewController: UITableViewController {
         super.viewDidLoad()
    
     }
-    //
-    func getArticles() -> [Article]? {
-        guard let articleData = UserDefaults.standard.object(forKey: "Articles") as? [Data] else { return nil }
-        return articleData.flatMap { return Article(data: $0) }
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // Maak de content van de cellen
@@ -48,6 +42,7 @@ class SavedFeedTableViewController: UITableViewController {
         cell.titleLabel.text = savedArticle.author
         cell.descriptionLabel.text = savedArticle.description
         
+        // Apart weer de foto ophalen.
         ArticleController.shared.fetchImage(url: savedArticle.urlToImage) {
             (image) in
             guard let image = image else { return }
@@ -55,10 +50,10 @@ class SavedFeedTableViewController: UITableViewController {
                 cell.titleImage.image = image
             }
         }
-        
         return cell
     }
     
+    // Laat de data zien die achter de opgelsagen artikelen zit.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSite" {
             let feedSiteViewController = segue.destination as! SavedFeedViewController
@@ -67,19 +62,15 @@ class SavedFeedTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return SavedArticles.count
     }
     
-    // Override to support editing the table view.
+    // Hier wordt het mogelijk om iets te laten verdwijnen. Zolang het een artikel is.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source swipe to delete

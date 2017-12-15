@@ -10,14 +10,15 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    // ACTIONS:
+    // Ga naar de loginpagina en maak de data die is opgeslagen "leeg".
     @IBAction func logOut(_ sender: Any) {
-        // maak een object om local user in op te slaan.
         let localUser = User(email: "", password: "")
-        // Sla op in de UserDefaults van het apparaat.
         UserDefaults.standard.set(try? PropertyListEncoder().encode(localUser), forKey:"profile")
-        
         self.performSegue(withIdentifier: "logOutsegue", sender: self)
     }
+    
+    // OVERRIDES:
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,16 +29,4 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -11,6 +11,7 @@
 		E9283E421FE2C4530049F419 /* SavedFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9283E411FE2C4530049F419 /* SavedFeedViewController.swift */; };
 		E9368D6A1FDD3D7A0047468F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9368D691FDD3D7A0047468F /* LoginViewController.swift */; };
 		E95BD7FA1FE448E200B59AE9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BD7F91FE448E200B59AE9 /* SettingsViewController.swift */; };
+		E95BD7FC1FE45CD800B59AE9 /* userSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BD7FB1FE45CD800B59AE9 /* userSettings.swift */; };
 		E9ADC5AC1FDD840B002F0D7A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADC5AB1FDD840B002F0D7A /* UserModel.swift */; };
 		E9ADC5B91FDDA4D8002F0D7A /* ArticleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADC5B81FDDA4D8002F0D7A /* ArticleItems.swift */; };
 		E9ADC5BB1FDDA7D1002F0D7A /* ArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADC5BA1FDDA7D1002F0D7A /* ArticleController.swift */; };
@@ -51,6 +52,7 @@
 		E9283E411FE2C4530049F419 /* SavedFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFeedViewController.swift; sourceTree = "<group>"; };
 		E9368D691FDD3D7A0047468F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E95BD7F91FE448E200B59AE9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E95BD7FB1FE45CD800B59AE9 /* userSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSettings.swift; sourceTree = "<group>"; };
 		E99983DE1FDD493B005DDF84 /* Follow the Feed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Follow the Feed.entitlements"; sourceTree = "<group>"; };
 		E9ADC5AB1FDD840B002F0D7A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		E9ADC5B81FDDA4D8002F0D7A /* ArticleItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleItems.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				E9ADC5AB1FDD840B002F0D7A /* UserModel.swift */,
 				E9ADC5B81FDDA4D8002F0D7A /* ArticleItems.swift */,
+				E95BD7FB1FE45CD800B59AE9 /* userSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9AF9A991FDE9A6900042C1C /* OnlineFeedTableViewCell.swift in Sources */,
+				E95BD7FC1FE45CD800B59AE9 /* userSettings.swift in Sources */,
 				E9ADC5BB1FDDA7D1002F0D7A /* ArticleController.swift in Sources */,
 				E9368D6A1FDD3D7A0047468F /* LoginViewController.swift in Sources */,
 				E9ADC5B91FDDA4D8002F0D7A /* ArticleItems.swift in Sources */,

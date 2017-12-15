@@ -103,6 +103,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
      }
     
+    // Hier wordt even de standaar bepaald. 
     @IBAction func changeSegment(_ sender: UISegmentedControl) {
         if segmentControll.selectedSegmentIndex == 0 {
             loginButton.setTitle("LOGIN", for: .normal)

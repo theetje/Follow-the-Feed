@@ -12,8 +12,16 @@ import WebKit
 class SavedFeedViewController: UIViewController, WKUIDelegate {
     var OnlineArticle: Article!
     
+    // ACTIONS:
+    @IBAction func unwindToOnlineTableView(segue: UIStoryboardSegue) {
+        if segue.identifier == "DismissOnlineFeed" {
+        }
+    }
+    
+    // OUTLETS:
     @IBOutlet weak var PageView: WKWebView!
     
+    // OVERRIDES:
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,10 +35,4 @@ class SavedFeedViewController: UIViewController, WKUIDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func unwindToOnlineTableView(segue: UIStoryboardSegue) {
-        if segue.identifier == "DismissOnlineFeed" {
-        }
-    }
-
 }

@@ -11,7 +11,6 @@ import Firebase
 import FirebaseDatabaseUI
 
 class OnlineFeedTableViewController: UITableViewController {
-
     var OnlineArticles = [Article]()
 
     // ACTIONS:
@@ -36,10 +35,10 @@ class OnlineFeedTableViewController: UITableViewController {
         
     // Maak de content van de cellen
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let onlineArticle = OnlineArticles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "OnlineCellIdentifier", for: indexPath) as! OnlineFeedTableViewCell
         
+        // Stel de knop op 0 in zodat die zo begint. (niet zeker of er data opgehaald kan worden).
         cell.likeButton.setTitle("Likes: 0", for: .normal)
         
         cell.titleLabel.text = onlineArticle.author
